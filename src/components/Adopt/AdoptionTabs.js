@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 function AdoptionTabs(props) {
   const [value, setValue] = useState('Cat');
+  const animalTypes = ['Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Other'];
 
   const handleChange = (newValue) => {
     props.dispatch({
@@ -14,13 +15,12 @@ function AdoptionTabs(props) {
   };
 
   return (
-    <Grid>
-      <Grid item>
-        <Button onClick={() => handleChange('Cat')}>Cat</Button>
-        <Button onClick={() => handleChange('Dog')}>Dog</Button>
-        <Button onClick={() => handleChange('Snake')}>Snake</Button>
-        <Button onClick={() => handleChange('Rabbit')}>Rabbit</Button>
-      </Grid>
+    <Grid container justify="space-evenly">
+        {animalTypes.map((animal, i) => 
+          <Grid key={i} item>
+            <Button onClick={() => handleChange(animal)}>{animal}</Button>
+          </Grid>
+        )}
     </Grid>
   );
 }
