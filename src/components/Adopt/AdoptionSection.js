@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid, Container, Typography } from "@material-ui/core";
-
+// Renders the animals depending on which adoption tab is selected
 function AdoptionSection(props) {
   return (
     <Grid container direction="row">
