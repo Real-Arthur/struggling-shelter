@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Grid, Container, Typography } from "@material-ui/core";
+import { Grid, Container, Typography, Button } from "@material-ui/core";
+import AdoptionAnimal from './AdoptionAnimal';
 // Renders the animals depending on which adoption tab is selected
 function AdoptionSection(props) {
   return (
     <Grid container direction="row">
       {props.store.animalsReducer.map((animal, i) =>
         <Grid xs={6} container key={i} direction="row" justify="space-between" alignItems="center">
-          <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center">
-            <img style={{height: '15rem', width: '15rem'}} src={animal.picture}/>
-            <Typography>
-              {animal.name}
-            </Typography>
-            <Typography>
-              {animal.age}
-            </Typography>
-          </Grid>
-          <Grid item>
-            {animal.personality}
-          </Grid>
+          <AdoptionAnimal
+          key={i}
+          id={animal.id}
+          name={animal.name}
+          breed={animal.breed}
+          color={animal.color}
+          coat_length={animal.coat_length}
+          age={animal.age}
+          sex={animal.sex}
+          size={animal.size}
+          personality={animal.personality}
+          house_trained={animal.house_trained}
+          vaccinated={animal.vaccinated}
+          neutered={animal.neutered}
+          price={animal.price}
+          picture={animal.picture}
+          />
         </Grid>
       )}
     </Grid>
