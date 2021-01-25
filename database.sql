@@ -29,7 +29,7 @@ CREATE TABLE "people" (
 	"date_of_birth" DATE NOT NULL,
 	"address" VARCHAR (256) NOT NULL,
 	"occupation" VARCHAR (64),
-	"type_of_home" VARCHAR (16),
+	"type_of_home" VARCHAR (64),
 	"contacted" BOOLEAN DEFAULT false
 );
 CREATE TABLE "staff" (
