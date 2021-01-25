@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: 'absolute',
-    width: '50rem',
+    width: '75%',
     border: '2px solid #000',
     backgroundColor: '#eceff1'
     // boxShadow: theme.shadows[5],
@@ -22,34 +22,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+// Handles individually rendered animals and
+// corresponding modals
 function AdoptionAnimal(props) {
-
   const classes = useStyles();
-  // const [modalStyle] = useState(getModalStyle);
   const [openModal, setOpenModal] = useState(false);
-  // const [review, setReview] = useState(props.movieReview)
 
   const handleOpen = () => {
     setOpenModal(true)
-    // setReview(props.movieReview)
   };
-
   const handleClose = () => {
     setOpenModal(false)
 
   };
-
+  // Modal info
   const moreInfo = (       
         <Grid container className={classes.paper} direction='column' alignItems='center'>
           <Grid item> 
             <Typography><Button>Interested in Adopting</Button>{props.name}</Typography>
           </Grid>
           <Grid item>
-            <img style={{height: '15rem', width: '15rem'}} src={props.picture} alt={props.name}/>
-          </Grid>
-          <Grid item>
-            <Grid item><Typography>{props.breed}</Typography></Grid> 
+            <img style={{height: '20rem', width: 'auto'}} src={props.picture} alt={props.name}/>
           </Grid>
           <Grid item>
             <Grid xs={6} container direction='row' justify='space-between' alignItems='flex-start'>
@@ -60,36 +53,28 @@ function AdoptionAnimal(props) {
             <Grid item><Typography>{props.breed}</Typography></Grid>
             </Grid>             
           </Grid>
-        
       </Grid>
   );
-
   return (
     <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center">
-            <Grid item>
-            <img style={{height: '15rem', width: '15rem'}} src={props.picture}/>
-            <Typography>
-              Name: {props.name}
-            </Typography>
-            <Typography>
-              Age: {props.age}
-            </Typography>
-            </Grid>
-            <Button onClick={handleOpen}>More Info About {props.name}</Button>
-          <Grid item>
-            Personality: 
-            <br></br>
-            {props.personality}
-          </Grid>
-      
-      <Modal
-      className={classes.modal}
-      open={openModal}
-      onClose={handleClose}
-      >
-          {moreInfo}
-      </Modal>
+      <Grid item>
+        <img style={{height: '15rem', width: '15rem'}} src={props.picture}/>
+          <Typography>
+            Name: {props.name}
+          </Typography>
+          <Typography>
+            Age: {props.age}
+          </Typography>
       </Grid>
+        <Button onClick={handleOpen}>More Info About {props.name}</Button>
+      <Modal
+        className={classes.modal}
+        open={openModal}
+        onClose={handleClose}
+      >
+        {moreInfo}
+      </Modal>
+    </Grid>
   );
 }
 
