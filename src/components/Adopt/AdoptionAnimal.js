@@ -21,25 +21,35 @@ const useStyles = makeStyles((theme) => ({
     // padding: theme.spacing(2, 4, 3),
   },
 }));
-
 // Handles individually rendered animals and
 // corresponding modals
 function AdoptionAnimal(props) {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
-
   const handleOpen = () => {
     setOpenModal(true)
   };
   const handleClose = () => {
     setOpenModal(false)
-
   };
+  const toRegister = () => {
+    console.log('props', props);
+    
+    props.dispatch({
+      type: 'SET_INTERESTED',
+      payload: {
+        id: props.id,
+        name: props.name
+      }
+    })
+    props.history.push('/register')
+  }
   // Modal info
   const moreInfo = (       
         <Grid container className={classes.paper} direction='column' alignItems='center'>
-          <Grid item> 
-            <Typography><Button>Interested in Adopting</Button>{props.name}</Typography>
+          <Grid item>
+            <Button color='primary' onClick={toRegister}>Interested in Adopting</Button>
+            <Typography>{props.name}</Typography>
           </Grid>
           <Grid item>
             <img style={{height: '20rem', width: 'auto'}} src={props.picture} alt={props.name}/>

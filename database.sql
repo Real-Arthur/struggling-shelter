@@ -26,7 +26,6 @@ CREATE TABLE "people" (
 	"first_name" VARCHAR (64) NOT NULL,
 	"last_name" VARCHAR (64) NOT NULL,
 	"email" VARCHAR (128) NOT NULL,
-	"password" VARCHAR (2048) NOT NULL,
 	"date_of_birth" DATE NOT NULL,
 	"address" VARCHAR (256) NOT NULL,
 	"occupation" VARCHAR (64),
