@@ -12,6 +12,7 @@ import Donate from '../Donate/Donate';
 import Register from '../Register/Register';
 // High level component to house and organize child components
 class App extends Component {
+  
   render() {
     return (
       <Router>

@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Tabs, Tab, AppBar } from "@material-ui/core";
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './Adopt.css';
 // Holds tabs for animal type selection
 function AdoptionTabs(props) {
   // Selecting a different tab changes the animal type viewed
-  const [value, setValue] = useState('Cat');
+  const [value, setValue] = useState(0);
   const animalTypes = ['Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Other'];
   // starts the fetch saga which gets animals of selected type
   // from the database
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
+    console.log('newValue', newValue);
+    let animalsToFind = animalTypes[newValue]
+    setValue(newValue)
     props.dispatch({
       type: 'FETCH_ANIMALS',
-      payload: newValue
+      payload: animalsToFind
     })
   };
   return (
-    <Grid container justify="space-evenly">
-        {animalTypes.map((animal, i) => 
-          <Grid key={i} item>
-            <Button onClick={() => handleChange(animal)}>{animal}</Button>
-          </Grid>
+    <AppBar position='static' style={{backgroundColor: '#2374AB'}}>
+      <Tabs 
+        value={value}
+        onChange={handleChange}
+        indicatorColor='secondary'
+        variant='scrollable'
+        scrollButtons='auto'
+      >
+        {animalTypes.map(animal =>
+          <Tab label={animal} />
         )}
-    </Grid>
+      </Tabs>
+    </AppBar>
   );
 }
 

@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid, Button, Typography, TextField, TextareaAutosize } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles'
+import { createMuiTheme, withStyles, makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import { green, purple } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -20,7 +21,28 @@ const useStyles = makeStyles((theme) => ({
     // boxShadow: theme.shadows[5],
     // padding: theme.spacing(2, 4, 3),
   },
+  margin: {
+    margin: theme.spacing(1),
+  }
 }));
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[800],
+    '&:hover': {
+      backgroundColor: purple[900],
+    },
+  },
+}))(Button);
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});
+
+
 // Handles individually rendered animals and
 // corresponding modals
 function AdoptionAnimal(props) {
@@ -76,7 +98,7 @@ function AdoptionAnimal(props) {
             Age: {props.age}
           </Typography>
       </Grid>
-        <Button onClick={handleOpen}>More Info About {props.name}</Button>
+        <ColorButton variant='outlined' color='primary' onClick={handleOpen}>More Info About {props.name}</ColorButton>
       <Modal
         className={classes.modal}
         open={openModal}

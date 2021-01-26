@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Grid, Container, Typography, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import AdoptionAnimal from './AdoptionAnimal';
 // Renders the animals depending on which adoption tab is selected
 function AdoptionSection(props) {
