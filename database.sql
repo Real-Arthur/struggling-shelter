@@ -26,37 +26,13 @@ CREATE TABLE "people" (
 	"first_name" VARCHAR (64) NOT NULL,
 	"last_name" VARCHAR (64) NOT NULL,
 	"email" VARCHAR (128) NOT NULL,
-	"date_of_birth" DATE NOT NULL,
-	"address" VARCHAR (256) NOT NULL,
-	"occupation" VARCHAR (64),
-	"type_of_home" VARCHAR (64),
-	"contacted" BOOLEAN DEFAULT false
-);
-CREATE TABLE "staff" (
-	"id" SERIAL PRIMARY KEY,
-	"first_name" VARCHAR (64) NOT NULL,
-	"last_name" VARCHAR (64) NOT NULL,
-	"password" VARCHAR (2048) NOT NULL,
-	"admin_level" admin_level NOT NULL
-);
-CREATE TABLE "people_interested" (
-	"id" SERIAL PRIMARY KEY,
-	"people_id" INT REFERENCES "people",
-	"pet_id" INT REFERENCES "animals",
-	"followed_up_with" BOOLEAN DEFAULT false,
-	"adoption_success" BOOLEAN DEFAULT false
-);
-CREATE TABLE "people" (
-	"id" SERIAL PRIMARY KEY,
-	"first_name" VARCHAR (64) NOT NULL,
-	"last_name" VARCHAR (64) NOT NULL,
-	"email" VARCHAR (128) NOT NULL,
 	"password" VARCHAR (2048) NOT NULL,
 	"date_of_birth" DATE NOT NULL,
 	"address" VARCHAR (256) NOT NULL,
 	"occupation" VARCHAR (64),
 	"type_of_home" VARCHAR (16),
-	"contacted" BOOLEAN DEFAULT false
+	"contacted" BOOLEAN DEFAULT false,
+	"adoption_success" BOOLEAN DEFAULT false
 );
 CREATE TABLE "staff" (
 	"id" SERIAL PRIMARY KEY,

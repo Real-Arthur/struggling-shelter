@@ -95,7 +95,7 @@ function AdoptionAnimal(props) {
     </Grid>
   );
   return (
-    <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
+    <Grid style={{height: '25rem', width: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
       <Grid item style={{paddingBottom: '1em'}}>
         <img style={{height: '15rem', width: '15rem'}} src={props.picture} alt={props.name}/>
           <Typography>
@@ -105,7 +105,11 @@ function AdoptionAnimal(props) {
             Age: {props.age}
           </Typography>
       </Grid>
-        <ColorButton variant='outlined' color='primary' onClick={handleOpen}>More Info About {props.name}</ColorButton>
+        <ColorButton variant='outlined' color='primary' onClick={handleOpen}>
+          More Info About
+          <br/> 
+          {props.name}
+        </ColorButton>
       <Modal
         className={classes.modal}
         open={openModal}

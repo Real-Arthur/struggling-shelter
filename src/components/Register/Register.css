@@ -1,0 +1,17 @@
+.abort-button {
+  background-color: #FF8484;
+}
+.submit-button {
+  background-color: #4DCCBD;
+}
+.edit-button {
+  background-color: #D6FFF6;
+  color: #231651;
+}
+.form-spacing {
+  margin-bottom: 1em;
+}
+.form {
+  margin-left: 2em;
+  max-width: 100em;
+}

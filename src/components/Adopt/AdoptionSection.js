@@ -8,21 +8,23 @@ function AdoptionSection(props) {
   return (
     <Grid container direction="row">
       {props.store.animalsReducer.map((animal, i) =>
-        <Grid xs={12} sm={6} md={4} lg={3} container key={i} direction="row" justify="space-around" alignItems="center">
-          <AdoptionAnimal
-          key={i}
-          id={animal.id}
-          name={animal.name}
-          breed={animal.breed}
-          color={animal.color}
-          coat_length={animal.coat_length}
-          age={animal.age}
-          sex={animal.sex}
-          size={animal.size}
-          personality={animal.personality}
-          price={animal.price}
-          picture={animal.picture}
-          />
+        <Grid key={i} item xs={12} sm={6} md={4} lg={3}>
+          <Grid container direction="row" justify="space-around" alignItems="center">
+            <AdoptionAnimal
+              key={i}
+              id={animal.id}
+              name={animal.name}
+              breed={animal.breed}
+              color={animal.color}
+              coat_length={animal.coat_length}
+              age={animal.age}
+              sex={animal.sex}
+              size={animal.size}
+              personality={animal.personality}
+              price={animal.price}
+              picture={animal.picture}
+            />
+          </Grid>
         </Grid>
       )}
     </Grid>
