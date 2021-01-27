@@ -24,6 +24,7 @@ class App extends Component {
           <Route path='/donate' exact component={Donate} />
           <Route path='/register' exact component={Register} />
         </Switch>
+        
       </Router>
     )
   }

@@ -5,6 +5,7 @@ import { Box, Typography, Grid } from '@material-ui/core';
 import AdoptButton from './NavBar/AdoptButton';
 import DonateButton from './NavBar/DonateButton';
 import VolunteerButton from './NavBar/VolunteerButton';
+import NameAndLogo from './NameAndLogo';
 // Banner to house and organize nav bar, animal shelter, etc. 
 function Banner(props) {
   console.log('location', props.location.pathname);
@@ -15,7 +16,7 @@ function Banner(props) {
           <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
             <DonateButton />
             <VolunteerButton />
-          </Grid>  
+          </Grid>
           }
         {props.location.pathname === '/donate' &&
           <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
@@ -29,11 +30,15 @@ function Banner(props) {
             <DonateButton />
           </Grid>  
         }
+        {props.location.pathname === '/register' &&
+          <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
+            <AdoptButton />
+            <DonateButton />
+            <VolunteerButton />
+          </Grid>  
+        }
         <Grid item>
-          <Grid container direction='column' alignItems='center'>
-            <Typography variant="h2" style={{color: '#231651'}}>Animal Shelter</Typography>
-           <Typography>Thinking about adopting a new friend. Press tabs to browse by type:</Typography>
-          </Grid>       
+          <NameAndLogo />  
         </Grid>
       </Grid>
     </Box>

@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid, Button, Typography, TextField, TextareaAutosize } from '@material-ui/core';
 import { createMuiTheme, withStyles, makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { green, purple } from '@material-ui/core/colors';
-
+import { green, cyan } from '@material-ui/core/colors';
+import './Adopt.css'
+// Material UI styling
 const useStyles = makeStyles((theme) => ({
   modal: {
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  maxWidth: '50%',
+  margin: 'auto'
   },
   paper: {
     position: 'absolute',
-    width: '75%',
     border: '2px solid #000',
     backgroundColor: '#eceff1'
     // boxShadow: theme.shadows[5],
@@ -23,26 +24,37 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: theme.spacing(1),
+  },
+  picture: {
+    maxWidth: '50%',
+    margin: 'auto'
   }
 }));
-
+// Cyan button
 const ColorButton = withStyles((theme) => ({
   root: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[800],
+    color: theme.palette.getContrastText(cyan[200]),
+    backgroundColor: cyan[200],
     '&:hover': {
-      backgroundColor: purple[900],
+      backgroundColor: cyan[400],
     },
   },
 }))(Button);
-
+// Green button
+const ColorButton2 = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(green[400]),
+    backgroundColor: green[400],
+    '&:hover': {
+      backgroundColor: green[600],
+    },
+  },
+}))(Button);
 const theme = createMuiTheme({
   palette: {
     primary: green,
   },
 });
-
-
 // Handles individually rendered animals and
 // corresponding modals
 function AdoptionAnimal(props) {
@@ -56,7 +68,6 @@ function AdoptionAnimal(props) {
   };
   const toRegister = () => {
     console.log('props', props);
-    
     props.dispatch({
       type: 'SET_INTERESTED',
       payload: {
@@ -66,30 +77,28 @@ function AdoptionAnimal(props) {
     })
     props.history.push('/register')
   }
-  // Modal info
+// Modal info
   const moreInfo = (       
-        <Grid container className={classes.paper} direction='column' alignItems='center'>
-          <Grid item>
-            <Button color='primary' onClick={toRegister}>Interested in Adopting</Button>
-            <Typography>{props.name}</Typography>
-          </Grid>
-          <Grid item>
-            <img style={{height: '20rem', width: 'auto'}} src={props.picture} alt={props.name}/>
-          </Grid>
-          <Grid item>
-            <Grid xs={6} container direction='row' justify='space-between' alignItems='flex-start'>
-            <Grid item><Typography>{props.age}</Typography></Grid>
-            <Grid item><Typography>{props.color}</Typography></Grid>              
-            <Grid item><Typography>{props.coat_length}</Typography></Grid>              
-            <Grid item><Typography>{props.size}</Typography></Grid>              
-            <Grid item><Typography>{props.breed}</Typography></Grid>
-            </Grid>             
-          </Grid>
+    <Grid container className={classes.paper} direction='column' alignItems='center'>
+      <Grid item>
+        <Grid container direction='column' alignItems='center'>
+          <ColorButton2 color='primary' onClick={toRegister}>
+            Interested in Adopting
+          </ColorButton2>
+          <Typography variant='h3'>{props.name}</Typography>
+          <img className={classes.picture} src={props.picture} alt={props.name}/>
+            <Typography>Age: {props.age} old</Typography>
+            <Typography>Size: {props.size}</Typography>
+            <Typography>Color: {props.color}</Typography>      
+            <Typography>Breed: {props.breed}</Typography>                       
+            <Typography>Coat: {props.coat_length}</Typography>
+        </Grid> 
       </Grid>
+  </Grid>
   );
   return (
-    <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center">
-      <Grid item>
+    <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
+      <Grid item style={{paddingBottom: '1em'}}>
         <img style={{height: '15rem', width: '15rem'}} src={props.picture}/>
           <Typography>
             Name: {props.name}
