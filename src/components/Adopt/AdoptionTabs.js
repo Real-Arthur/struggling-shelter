@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Button, Tabs, Tab, AppBar } from "@material-ui/core";
+import { Tabs, Tab, AppBar } from "@material-ui/core";
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './Adopt.css';
 // Holds tabs for animal type selection
@@ -14,6 +14,7 @@ function AdoptionTabs(props) {
     console.log('newValue', newValue);
     let animalsToFind = animalTypes[newValue]
     setValue(newValue)
+    // fetches by animal id
     props.dispatch({
       type: 'FETCH_ANIMALS',
       payload: animalsToFind
@@ -28,8 +29,8 @@ function AdoptionTabs(props) {
         variant='scrollable'
         scrollButtons='auto'
       >
-        {animalTypes.map(animal =>
-          <Tab label={animal} />
+        {animalTypes.map((animal, i) =>
+          <Tab key={i} label={animal} />
         )}
       </Tabs>
     </AppBar>

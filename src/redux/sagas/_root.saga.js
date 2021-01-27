@@ -1,9 +1,6 @@
 import { all } from 'redux-saga/effects';
 import animalsSaga from './animals.saga';
-import peopleSaga from './people.saga';
-import staffSaga from './staff.saga';
 import interestedSaga from './interested.saga';
-
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -14,8 +11,6 @@ import interestedSaga from './interested.saga';
 export default function* rootSaga() {
   yield all([
     animalsSaga(),
-    peopleSaga(),
-    staffSaga(),
     interestedSaga()
   ]);
 }

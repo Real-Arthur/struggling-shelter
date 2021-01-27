@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid } from "@material-ui/core";
@@ -20,9 +20,6 @@ function AdoptionSection(props) {
           sex={animal.sex}
           size={animal.size}
           personality={animal.personality}
-          house_trained={animal.house_trained}
-          vaccinated={animal.vaccinated}
-          neutered={animal.neutered}
           price={animal.price}
           picture={animal.picture}
           />

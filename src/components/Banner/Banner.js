@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Box, Typography, Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import AdoptButton from './NavBar/AdoptButton';
 import DonateButton from './NavBar/DonateButton';
 import VolunteerButton from './NavBar/VolunteerButton';
 import NameAndLogo from './NameAndLogo';
 // Banner to house and organize nav bar, animal shelter, etc. 
 function Banner(props) {
-  console.log('location', props.location.pathname);
   return (
     <Box>
       <Grid container direction='column' alignItems='center'>

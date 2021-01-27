@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Grid, Button, Typography, TextField, TextareaAutosize } from '@material-ui/core';
-import { createMuiTheme, withStyles, makeStyles } from '@material-ui/core/styles';
+import { Grid, Button, Typography } from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { green, cyan } from '@material-ui/core/colors';
 import './Adopt.css'
@@ -50,11 +50,6 @@ const ColorButton2 = withStyles((theme) => ({
     },
   },
 }))(Button);
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
-  },
-});
 // Handles individually rendered animals and
 // corresponding modals
 function AdoptionAnimal(props) {
@@ -85,21 +80,24 @@ function AdoptionAnimal(props) {
           <ColorButton2 color='primary' onClick={toRegister}>
             Interested in Adopting
           </ColorButton2>
-          <Typography variant='h3'>{props.name}</Typography>
-          <img className={classes.picture} src={props.picture} alt={props.name}/>
+            <Typography variant='h3'>{props.name}</Typography>
+            <img className={classes.picture} src={props.picture} alt={props.name}/>
+            {/* Animal properties */}
             <Typography>Age: {props.age} old</Typography>
             <Typography>Size: {props.size}</Typography>
             <Typography>Color: {props.color}</Typography>      
             <Typography>Breed: {props.breed}</Typography>                       
             <Typography>Coat: {props.coat_length}</Typography>
+            <Typography>Personality: {props.personality}</Typography>
+            <Typography>Price: ${props.price}</Typography>
         </Grid> 
       </Grid>
-  </Grid>
+    </Grid>
   );
   return (
     <Grid style={{maxHeight: '25rem', maxWidth: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
       <Grid item style={{paddingBottom: '1em'}}>
-        <img style={{height: '15rem', width: '15rem'}} src={props.picture}/>
+        <img style={{height: '15rem', width: '15rem'}} src={props.picture} alt={props.name}/>
           <Typography>
             Name: {props.name}
           </Typography>
