@@ -104,6 +104,9 @@ function AdoptionAnimal(props) {
           <Typography>
             Age: {props.age}
           </Typography>
+          <Typography>
+            Breed: {props.breed}
+          </Typography>
       </Grid>
         <ColorButton variant='outlined' color='primary' onClick={handleOpen}>
           More Info About

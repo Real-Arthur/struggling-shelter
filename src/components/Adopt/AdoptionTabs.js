@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Tab, AppBar } from "@material-ui/core";
+import { Tabs, Tab, AppBar, Typography } from "@material-ui/core";
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './Adopt.css';
 // Holds tabs for animal type selection
@@ -21,6 +21,8 @@ function AdoptionTabs(props) {
     })
   };
   return (
+    <>
+    <Typography style={{paddingLeft: '1em'}} variant='h6'>Interested in a new friend? Press a tab to search pets by type:</Typography>
     <AppBar position='static' style={{backgroundColor: '#2374AB'}}>
       <Tabs 
         value={value}
@@ -34,6 +36,7 @@ function AdoptionTabs(props) {
         )}
       </Tabs>
     </AppBar>
+    </>
   );
 }
 
