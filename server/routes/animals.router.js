@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
       res.send(response.rows);
     })
     .catch(error => {
-      console.log('error in cats.router.js GET', error);
+      console.log('error in animals.router.js GET', error);
       res.status(500);
     });
 });

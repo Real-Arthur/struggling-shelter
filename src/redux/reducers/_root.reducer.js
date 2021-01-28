@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 import animalsReducer from './animals.reducer';
-import peopleReducer from './people.reducer';
 import staffReducer from './staff.reducer';
 import interestedReducer from './interested.reducer';
-import errorsReducer from './errors.reducer';
-import userReducer from './user.reducer';
+import errors from './errors.reducer';
+import user from './user.reducer';
+import contactsReducer from './contacts.reducer';
 
 const rootReducer = combineReducers({
   animalsReducer,
-  peopleReducer,
   staffReducer,
   interestedReducer,
-  errorsReducer,
-  userReducer
+  errors,
+  user,
+  contactsReducer
 });
 
 export default rootReducer;
