@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 class LogOutButton extends Component {
   doBoth = () => {
@@ -12,13 +12,7 @@ class LogOutButton extends Component {
   }
   render() {
     return (
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => this.doBoth()}
-      >
-        <Typography color="error">Log Out</Typography>
-      </Button>
+      <Button onClick={() => this.doBoth()}>Log Out</Button>
     )
   }
 };

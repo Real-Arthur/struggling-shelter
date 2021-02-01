@@ -66,8 +66,8 @@ function AdoptionAnimal(props) {
     props.dispatch({
       type: 'SET_INTERESTED',
       payload: {
-        id: props.id,
-        name: props.name
+        id: props.animal.id,
+        name: props.animal.name
       }
     })
     props.history.push('/register')
@@ -80,16 +80,16 @@ function AdoptionAnimal(props) {
           <ColorButton2 color='primary' onClick={toRegister}>
             Interested in Adopting
           </ColorButton2>
-            <Typography variant='h3'>{props.name}</Typography>
-            <img className={classes.picture} src={props.picture} alt={props.name}/>
+            <Typography variant='h3'>{props.animal.name}</Typography>
+            <img className={classes.picture} src={props.animal.picture} alt={props.animal.name}/>
             {/* Animal properties */}
-            <Typography>Age: {props.age} old</Typography>
-            <Typography>Size: {props.size}</Typography>
-            <Typography>Color: {props.color}</Typography>      
-            <Typography>Breed: {props.breed}</Typography>                       
-            <Typography>Coat: {props.coat_length}</Typography>
-            <Typography>Personality: {props.personality}</Typography>
-            <Typography>Price: ${props.price}</Typography>
+            <Typography>Age: {props.animal.age} old</Typography>
+            <Typography>Size: {props.animal.size}</Typography>
+            <Typography>Color: {props.animal.color}</Typography>      
+            <Typography>Breed: {props.animal.breed}</Typography>                       
+            <Typography>Coat: {props.animal.coat_length}</Typography>
+            <Typography>Personality: {props.animal.personality}</Typography>
+            <Typography>Price: ${props.animal.price}</Typography>
         </Grid> 
       </Grid>
     </Grid>
@@ -97,21 +97,21 @@ function AdoptionAnimal(props) {
   return (
     <Grid style={{height: '25rem', width: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
       <Grid item style={{paddingBottom: '1em'}}>
-        <img style={{height: '15rem', width: '15rem'}} src={props.picture} alt={props.name}/>
+        <img style={{height: '15rem', width: '15rem'}} src={props.animal.picture} alt={props.animal.name}/>
           <Typography>
-            Name: {props.name}
+            Name: {props.animal.name}
           </Typography>
           <Typography>
-            Age: {props.age}
+            Age: {props.animal.age}
           </Typography>
           <Typography>
-            Breed: {props.breed}
+            Breed: {props.animal.breed}
           </Typography>
       </Grid>
         <ColorButton variant='outlined' color='primary' onClick={handleOpen}>
           More Info About
           <br/> 
-          {props.name}
+          {props.animal.name}
         </ColorButton>
       <Modal
         className={classes.modal}

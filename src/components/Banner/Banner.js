@@ -6,35 +6,56 @@ import AdoptButton from './NavBar/AdoptButton';
 import DonateButton from './NavBar/DonateButton';
 import VolunteerButton from './NavBar/VolunteerButton';
 import NameAndLogo from './NameAndLogo';
-// Banner to house and organize nav bar, animal shelter, etc. 
+import LogOutButton from './NavBar/LogOutButton';
+import './Banner.css';
+// Banner to house and organize nav bar, name, logo 
 function Banner(props) {
   return (
     <Box>
       <Grid container direction='column' alignItems='center'>
         {props.location.pathname === '/home' &&
-          <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
+          <Grid item className='banner'>
             <DonateButton />
             <VolunteerButton />
           </Grid>
           }
         {props.location.pathname === '/donate' &&
-          <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
+          <Grid item className='banner'>
             <AdoptButton />
             <VolunteerButton />
           </Grid>  
         }
         {props.location.pathname === '/volunteer' &&
-          <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
+          <Grid item className='banner'>
             <AdoptButton />
             <DonateButton />
           </Grid>  
         }
         {props.location.pathname === '/register' &&
-          <Grid item style={{backgroundColor: '#D6FFF6', width: '100%'}}>
+          <Grid item className='banner'>
             <AdoptButton />
             <DonateButton />
             <VolunteerButton />
           </Grid>  
+        }
+        {props.location.pathname === '/staff' &&
+        <Grid item className='banner'>
+            <AdoptButton />
+            <DonateButton />
+            <VolunteerButton />
+            </Grid>
+        }
+        {props.location.pathname === '/staff/home' &&
+        <Grid container direction='row' justify='space-between' className='staffBanner'>
+          <Grid item >
+            <AdoptButton />
+            <DonateButton />
+            <VolunteerButton />
+            </Grid>
+            <Grid item >
+              <LogOutButton />
+            </Grid>
+          </Grid>
         }
         <Grid item>
           <NameAndLogo />  
