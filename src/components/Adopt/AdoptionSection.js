@@ -12,17 +12,7 @@ function AdoptionSection(props) {
           <Grid container direction="row" justify="space-around" alignItems="center">
             <AdoptionAnimal
               key={i}
-              id={animal.id}
-              name={animal.name}
-              breed={animal.breed}
-              color={animal.color}
-              coat_length={animal.coat_length}
-              age={animal.age}
-              sex={animal.sex}
-              size={animal.size}
-              personality={animal.personality}
-              price={animal.price}
-              picture={animal.picture}
+              animal={animal}
             />
           </Grid>
         </Grid>
