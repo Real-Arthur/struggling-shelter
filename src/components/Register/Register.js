@@ -103,7 +103,6 @@ class Register extends Component {
   render() {
     return (
       <Container className='form' maxWidth='xs'>
-        {/* <Grid container direction='column' justify='flex-start' alignItems='center'> */}
           <Typography variant="h6">Register To Adopt {this.props.store.interestedReducer.name}</Typography>
             <InputLabel className='form-spacing' htmlFor='firstName'>
               First Name:
@@ -185,7 +184,6 @@ class Register extends Component {
             <Button variant='contained' color='primary' disabled={this.confirmedInputs} onClick={this.confirmAdoptionInterest}>
               Submit Registration
             </Button>
-        {/* </Grid> */}
       </Container>
     );
   }

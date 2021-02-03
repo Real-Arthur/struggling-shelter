@@ -9,12 +9,12 @@ import Banner from '../Banner/Banner';
 import Adopt from '../Adopt/Adopt';
 import Volunteer from '../Volunteer/Volunteer';
 import Donate from '../Donate/Donate';
+import About from '../About/About';
 import Register from '../Register/Register';
 import StaffLoginPage from '../Staff/StaffLoginPage';
 import StaffHome from '../Staff/StaffHome';
 // High level component to house and organize child components
 class App extends Component {
-  
   render() {
     return (
       <Router>
@@ -24,6 +24,7 @@ class App extends Component {
           <Route path='/home' exact component={Adopt} />
           <Route path='/volunteer' exact component={Volunteer} />
           <Route path='/donate' exact component={Donate} />
+          <Route path='/about' exact component={About} />
           <Route path='/register' exact component={Register} />
         </Switch>
         <Switch>

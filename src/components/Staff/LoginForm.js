@@ -25,7 +25,7 @@ class LoginForm extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  }; // end login
+  };
 
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
@@ -37,7 +37,6 @@ class LoginForm extends Component {
     return (
       <Box style={{backgroundColor: '#EFF7F6'}}>
       <Grid container direction="column" alignItems="flex-start">
-      {/* <form className="formPanel" onSubmit={this.login}> */}
       <Grid item>
         <Typography variant="h6">Login</Typography>
         {this.props.store.errors.loginMessage && (
@@ -72,9 +71,7 @@ class LoginForm extends Component {
         </Grid>
         <Grid item>
           <Button variant="contained" color="primary" onClick={this.login}>Login</Button>
-          {/* <input className="btn" type="submit" name="submit" value="Log In" /> */}
         </Grid>
-      {/* </form> */}
       </Grid></Box>
     );
   }

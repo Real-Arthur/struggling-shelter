@@ -2,40 +2,81 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Box, Grid } from '@material-ui/core';
-import AdoptButton from './NavBar/AdoptButton';
-import DonateButton from './NavBar/DonateButton';
-import VolunteerButton from './NavBar/VolunteerButton';
+import AdoptButton from '../NavButtons/AdoptButton';
+import DonateButton from '../NavButtons/DonateButton';
+import VolunteerButton from '../NavButtons/VolunteerButton';
+import AboutButton from '../NavButtons/AboutButton';
+import EmployeePortalButton from '../NavButtons/EmployeePortalButton';
+
+import LogOutButton from '../NavButtons/LogOutButton';
 import NameAndLogo from './NameAndLogo';
-import LogOutButton from './NavBar/LogOutButton';
 import './Banner.css';
-// Banner to house and organize nav bar, name, logo 
+// Banner to house and organize nav bar, name, logo
+// renders differently depending on user location 
 function Banner(props) {
   return (
     <Box>
       <Grid container direction='column' alignItems='center'>
         {props.location.pathname === '/home' &&
-          <Grid item className='banner'>
+        <Grid container direction='row' justify='space-between' className='staffBanner'>
+          <Grid item>
             <DonateButton />
             <VolunteerButton />
           </Grid>
+          <Grid item>
+            <AboutButton />
+            <EmployeePortalButton />
+          </Grid>
+          </Grid>
           }
         {props.location.pathname === '/donate' &&
-          <Grid item className='banner'>
-            <AdoptButton />
-            <VolunteerButton />
-          </Grid>  
+          <Grid container direction='row' justify='space-between' className='staffBanner'>
+            <Grid item>
+              <AdoptButton />
+              <VolunteerButton />
+            </Grid>
+            <Grid item>
+              <AboutButton />
+              <EmployeePortalButton />
+            </Grid>
+          </Grid>
+
         }
         {props.location.pathname === '/volunteer' &&
-          <Grid item className='banner'>
-            <AdoptButton />
-            <DonateButton />
-          </Grid>  
+          <Grid container direction='row' justify='space-between' className='staffBanner'>
+            <Grid item>
+              <AdoptButton />
+              <DonateButton />
+            </Grid>
+            <Grid item>
+              <AboutButton />
+              <EmployeePortalButton />
+            </Grid>  
+        </Grid>   
+        }
+        {props.location.pathname === '/about' &&
+          <Grid container direction='row' justify='space-between' className='staffBanner'>
+            <Grid item>
+              <AdoptButton />
+              <DonateButton />
+              <VolunteerButton />
+            </Grid>
+            <Grid item>
+              <EmployeePortalButton />
+            </Grid>  
+        </Grid>   
         }
         {props.location.pathname === '/register' &&
-          <Grid item className='banner'>
-            <AdoptButton />
-            <DonateButton />
-            <VolunteerButton />
+          <Grid container direction='row' justify='space-between' className='staffBanner'>
+            <Grid item>
+              <AdoptButton />
+              <DonateButton />
+              <VolunteerButton />
+            </Grid>
+            <Grid item>
+              <AboutButton />
+              <EmployeePortalButton />
+            </Grid> 
           </Grid>  
         }
         {props.location.pathname === '/staff' &&

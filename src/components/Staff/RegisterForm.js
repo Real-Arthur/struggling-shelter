@@ -64,10 +64,8 @@ class RegisterForm extends Component {
           </InputLabel>
         </Grid>
         <Grid item>
-          <Button variant="outlined" color="primary" onClick={this.registerUser}>Register</Button>
-          {/* <input className="btn" type="submit" name="submit" value="Register" /> */}
+          <Button variant="contained" color="secondary" onClick={this.registerUser}>Register</Button>
         </Grid>
-      {/* </form> */}
       </Grid></Box>
     );
   }

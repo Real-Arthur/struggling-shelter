@@ -12,9 +12,9 @@ function ContactSheet(props) {
   }, [])
 
   return (
-    <Grid container direction="row">
+    <Grid container direction="row" >
         {props.store.contactsReducer.map((contact, i) =>
-          <Grid key={i} item xs={12} sm={12} md={6} lg={4}>
+          <Grid key={i} item xs={12} sm={12} md={6} lg={4} style={{boxSizing: 'content-box', marginBottom: '3em'}}>
             <Grid container direction="row" justify="space-around" alignItems="center">
             <ContactSheetItems
               key={i}

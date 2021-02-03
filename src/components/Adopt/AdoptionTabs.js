@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { Tabs, Tab, AppBar, Typography } from "@material-ui/core";
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './Adopt.css';
+import animalTypes from '../AnimalTypes';
+
 // Holds tabs for animal type selection
 function AdoptionTabs(props) {
   // Selecting a different tab changes the animal type viewed
   const [value, setValue] = useState(0);
-  const animalTypes = ['Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Other'];
   // starts the fetch saga which gets animals of selected type
   // from the database
   const handleChange = (event, newValue) => {

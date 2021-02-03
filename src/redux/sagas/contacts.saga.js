@@ -28,10 +28,22 @@ function* setAsContacted(action) {
     type: `FETCH_CONTACTS`
   })
 }
+function* setInterested(action) {
+  console.log('INTERESTED', action.type);    
+  console.log('INTERESTED', action.payload);
+  let response = yield axios({
+    method: 'POST',
+    url: '/api/contacts',
+    data: action.payload
+  })
+  console.log('create interest response', response);
+  
+}
 
 function* animalsSaga() {
     yield takeLatest('FETCH_CONTACTS', searchContacts);
     yield takeLatest('SET_CONTACTED', setAsContacted);
+    yield takeLatest('CREATE_INTERESTED', setInterested);
   }
 
   export default animalsSaga;

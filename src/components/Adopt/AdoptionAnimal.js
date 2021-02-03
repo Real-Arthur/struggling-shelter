@@ -95,7 +95,7 @@ function AdoptionAnimal(props) {
     </Grid>
   );
   return (
-    <Grid style={{height: '25rem', width: '15rem'}} container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
+    <Grid container direction="row" justify="space-evenly" alignItems="center" className='slightpadding'>
       <Grid item style={{paddingBottom: '1em'}}>
         <img style={{height: '15rem', width: '15rem'}} src={props.animal.picture} alt={props.animal.name}/>
           <Typography>
