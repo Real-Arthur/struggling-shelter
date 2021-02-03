@@ -49,8 +49,6 @@ class App extends Component {
             exact 
             component={Register} 
           />
-        </Switch>
-        <Switch>
           <Route 
             path='/staff' 
             exact 
