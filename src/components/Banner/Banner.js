@@ -134,6 +134,25 @@ function Banner(props) {
             </Grid>
           </Grid>
         }
+        {props.location.pathname === '/staff' &&
+        <Grid item className='banner'>
+            <AdoptButton />
+            <DonateButton />
+            <VolunteerButton />
+            </Grid>
+        }
+        {props.location.pathname === '/staff/home' &&
+        <Grid container direction='row' justify='space-between' className='staffBanner'>
+          <Grid item >
+            <AdoptButton />
+            <DonateButton />
+            <VolunteerButton />
+            </Grid>
+            <Grid item >
+              <LogOutButton />
+            </Grid>
+          </Grid>
+        }
         <Grid item>
           <NameAndLogo />  
         </Grid>

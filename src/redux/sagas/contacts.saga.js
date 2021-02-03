@@ -33,6 +33,21 @@ function* setInterested(action) {
     data: action.payload
   })
 }
+function* setAsContacted(action) {
+  console.log('SET AS CONTACTED', action.type);
+  console.log('SET AS CONTACTED', action.payload);
+  let response = yield axios({
+      method: 'PUT',
+      url: `/api/contacts`,
+      data: {
+        id: action.payload.id
+      }
+  })
+  console.log('response by contacts router', response);
+  yield put({
+    type: `FETCH_CONTACTS`
+  })
+}
 
 function* contactsSaga() {
     yield takeLatest('FETCH_CONTACTS', searchContacts);
