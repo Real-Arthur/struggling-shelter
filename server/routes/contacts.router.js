@@ -3,10 +3,6 @@ const router = express.Router();
 const pool = require('../modules/pool')
 // gets everyone who hasn't been contacted yet
 router.get('/', (req, res) => {
-<<<<<<< HEAD
-=======
-  console.log('contacts get');
->>>>>>> 72988ad5c249fd20e5a0e36ab9e882e54623a343
   const queryString = 
     `SELECT 
       "people"."id",
