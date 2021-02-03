@@ -1,71 +1,48 @@
-# Getting Started with Create React App
+# Fake Animal Shelter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Application Overview
+An application to help a busy animal shelter organize and store information, list pets in a consistent manner, followup with interested adopters, and streamline the adoption process.
 
-## Available Scripts
+# Prompt
+Revved works with a local animal shelter. They have been incredibly busy and while they help find homes for a lot of animals they seem to be struggling to manage their process.  Information is all over the place. Some pet listings never make it to their site. The shelter has inconsistent followup with interested adopters and they are always backed up because they have to manually do all adoption paperwork once the adopter gets there. They want to streamline their business and get everyone on the same page so they can be more effective with the small team they have. You are on the team taking on this project.
 
-In the project directory, you can run:
+# Main problems
+1. Congestion in the store due to manually filling out forms
+2. Inconsistent follow up from employees to interested adopters
+3. Site doesn't render all pets consistently
 
-### `npm start`
+# Solutions
+## 1. Redirect form filling to online hub
+- Animal intake forms are filled out in app
+- Adoption prospect forms are filled out in app
+## 2. Automated emails
+- Upon login, staff sees a full list of people who are interested in adoption with contact info, desired pet, and date of interest
+- If the person hasn't been contacted after a period of time, an automated response is emailed to them telling them to either email, call or make an appointment
+## 3. ACID database
+- Reliably store pet intake information and interested adopters
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technology
+#### React/Redux
+- Frontend data management 
+- User interface
+#### Node/Express
+- Backend Server/Router
+- Authentication
+- Appointment scheduling
+#### PostgreSQL
+- ACID database
+#### Docker
+- Container for app
+#### Amazon Hosting
+- S3 for Photos
+- RDS for database
+- ECS for docker container
+- ECR for managed docker container deployment
+- SES for emails
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## To run
+Run `git clone https://github.com/Real-Arthur/fake-animal-shelter.git`
+Run `docker-compose up`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# struggling-shelter
+## Heroku deploy
+https://still-ravine-05936.herokuapp.com/

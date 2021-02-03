@@ -7,11 +7,10 @@ import './Adopt.css';
 function AdoptionTabs(props) {
   // Selecting a different tab changes the animal type viewed
   const [value, setValue] = useState(0);
-  const animalTypes = ['Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Other'];
+  const animalTypes = ['Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Spider', 'Bird'];
   // starts the fetch saga which gets animals of selected type
   // from the database
   const handleChange = (event, newValue) => {
-    console.log('newValue', newValue);
     let animalsToFind = animalTypes[newValue]
     setValue(newValue)
     // fetches by animal id
@@ -22,8 +21,16 @@ function AdoptionTabs(props) {
   };
   return (
     <>
-    <Typography style={{paddingLeft: '1em'}} variant='h6'>Interested in a new friend? Press a tab to search pets by type:</Typography>
-    <AppBar position='static' style={{backgroundColor: '#2374AB'}}>
+    <Typography 
+      style={{paddingLeft: '1em'}} 
+      variant='h6'
+    >
+      Interested in a new friend? Press a tab to search pets by type:
+    </Typography>
+    <AppBar 
+      position='static' 
+      style={{backgroundColor: '#2374AB'}}
+    >
       <Tabs 
         value={value}
         onChange={handleChange}
@@ -32,7 +39,10 @@ function AdoptionTabs(props) {
         scrollButtons='auto'
       >
         {animalTypes.map((animal, i) =>
-          <Tab key={i} label={animal} />
+          <Tab 
+            key={i} 
+            label={animal} 
+          />
         )}
       </Tabs>
     </AppBar>

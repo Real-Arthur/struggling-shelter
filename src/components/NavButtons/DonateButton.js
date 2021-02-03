@@ -8,7 +8,11 @@ function DonateButton(props) {
     props.history.push('/donate')
   }
   return (
-    <Button onClick={() => sendToDonatePage()}>Donate</Button>
+    <Button 
+      onClick={() => sendToDonatePage()}
+    >
+      Donate
+    </Button>
   )
 }
 

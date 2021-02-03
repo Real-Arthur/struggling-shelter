@@ -8,7 +8,11 @@ function HomeButton(props) {
     props.history.push('/home')
   }
   return (
-    <Button onClick={() => sendHome()}>Adopt</Button>
+    <Button 
+      onClick={() => sendHome()}
+    >
+      Adopt
+    </Button>
   )
 }
 

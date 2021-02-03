@@ -8,7 +8,11 @@ function VolunteerButton(props) {
     props.history.push('/volunteer')
   }
   return (
-    <Button onClick={() => sendToVolunteerPage()}>Volunteer</Button>
+    <Button 
+      onClick={() => sendToVolunteerPage()}
+    >
+      Volunteer
+    </Button>
   )
 }
 

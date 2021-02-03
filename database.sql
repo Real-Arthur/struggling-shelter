@@ -1,98 +1,271 @@
-CREATE TYPE size AS ENUM ('Small', 'Medium', 'Large');
 CREATE TYPE admin_level AS ENUM ('Admin', 'Staff', 'Volunteer');
+CREATE TYPE size AS ENUM ('Small', 'Medium', 'Large');
 CREATE TYPE animal_type AS ENUM ('Cat', 'Dog', 'Rabbit', 'Snake', 'Hamster', 'Mouse', 'Pig', 'Other');
 CREATE TYPE sex AS ENUM ('Male', 'Female', 'Unknown');
 
+-- We can create our user table
+CREATE TABLE "user" (
+  "id" SERIAL PRIMARY KEY,
+  "username" VARCHAR,
+  "password" VARCHAR,
+	"admin_level" admin_level DEFAULT 'Staff'
+);
+-- We can create our animals table
 CREATE TABLE "animals" (
-	"id" SERIAL PRIMARY KEY,
-	"name" VARCHAR (128) NOT NULL,
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR NOT NULL,
 	"animal_type" animal_type NOT NULL,
-	"breed" VARCHAR (64),
-	"color" VARCHAR (64),
-	"coat_length" VARCHAR (16),
-	"age" VARCHAR (16),
+	"breed" VARCHAR,
+	"color" VARCHAR,
+	"coat_length" VARCHAR,
+	"age" VARCHAR,
 	"sex" sex,
 	"size" size,
 	"house_trained" BOOLEAN,
 	"vaccinated" BOOLEAN,
 	"neutered" BOOLEAN,
-	"personality" VARCHAR (8192),
+	"personality" VARCHAR,
 	"price" INT,
-	"picture" VARCHAR (8192),
+	"picture" VARCHAR,
 	"adopted" BOOLEAN DEFAULT false
 );
+-- we can create our people table
 CREATE TABLE "people" (
 	"id" SERIAL PRIMARY KEY,
-	"first_name" VARCHAR (64) NOT NULL,
-	"last_name" VARCHAR (64) NOT NULL,
-	"email" VARCHAR (128) NOT NULL,
-	"password" VARCHAR (2048) NOT NULL,
+	"first_name" VARCHAR NOT NULL,
+	"last_name" VARCHAR NOT NULL,
+	"email" VARCHAR NOT NULL,
+	"phone_number" VARCHAR NOT NULL,
 	"date_of_birth" DATE NOT NULL,
-	"address" VARCHAR (256) NOT NULL,
-	"occupation" VARCHAR (64),
-	"type_of_home" VARCHAR (16),
+	"address" VARCHAR NOT NULL,
+	"occupation" VARCHAR,
+	"type_of_home" VARCHAR,
+	"interested_in" INT REFERENCES animals,
+	"interested_on" TIMESTAMP,
 	"contacted" BOOLEAN DEFAULT false,
 	"adoption_success" BOOLEAN DEFAULT false
 );
-CREATE TABLE "staff" (
-	"id" SERIAL PRIMARY KEY,
-	"first_name" VARCHAR (64) NOT NULL,
-	"last_name" VARCHAR (64) NOT NULL,
-	"password" VARCHAR (2048) NOT NULL,
-	"admin_level" admin_level NOT NULL
-);
-
-
+--- Fake animal data
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Luca', 'Dog', 'Italian Greyhound', 'Silver with white parts', 'Short hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Annoying', 2000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Luis', 'Dog', 'Pug', 'Brown with white parts', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Chill', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Emma', 'Dog', 'Cockerspaniel', 'Brown with white parts', 'Long hair', 'Eight Months', 'Female', 'Small', FALSE, FALSE, FALSE, 'Wild', 2000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
-
-
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Ryan', 'Cat', 'Tabbie', 'Orange with white parts', 'Long hair', 'One Month', 'Male', 'Small', TRUE, TRUE, TRUE, 'A cat', 1000, 'https://cdn2.thecatapi.com/images/6nn.jpg');
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Linus', 'Cat', 'Sphinx', 'Grey', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Not great', 4000, 'https://cdn2.thecatapi.com/images/6nn.jpg');
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Phil', 'Rabbit', 'Rabbit', 'Brown with white parts', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Chill', 5000, 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555922464/shape/mentalfloss/istock_000011513454_small.jpg');
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Paul', 'Rabbit', 'Rabbit', 'Brown with white parts', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, FALSE, TRUE, 'Chill', 2000, 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555922464/shape/mentalfloss/istock_000011513454_small.jpg');
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Tony', 'Snake', 'Pug', 'Brown with white parts', 'Short hair', 'Six Months', 'Male', 'Large', TRUE, TRUE, TRUE, 'Chill', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
 INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Lisa', 'Snake', 'Pug', 'Brown with white parts', 'Short hair', 'Six Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Chill', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
-
-
--------------
--- Test data
-INSERT INTO "people" ("first_name", "last_name", "email", "password", "date_of_birth", "address", "occupation", "type_of_home")
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Eleanor', 'Johnson', 'rthrcrsn@gmail.com', '12345', '11-19-1988', '123 Fake Street', 'Software Engineer', 'Apartment');
-
-INSERT INTO "staff" ("first_name", "last_name", "password", "admin_level")
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-('Fake', 'Admin', '12345', 'Admin');
-
-INSERT INTO "interest" ("people_id", "pet_type", "pet_id")
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
 VALUES
-(2, 'Cat', 2);
--------------
--- Test queries
-SELECT * FROM "interest"
-JOIN "people" ON "people"."id" = "interest"."people_id"
-JOIN "dog" ON "dog"."id" = "interest"."pet_id"
-WHERE "people"."id" = 1;
-
-SELECT * FROM "animals"
-WHERE "animal_type" = 'Cat';
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Jimmy', 'Dog', 'Australian Terrier', 'Brown', 'Long hair', 'Four Months', 'Male', 'Small', FALSE, TRUE, FALSE, 'Spirited, Alert, Loyal, Companionable, Even Tempered, Courageous', 2000, 'https://cdn2.thedogapi.com/images/r1Ylge5Vm_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Luis', 'Dog', 'Greyhound', 'Brown', 'Short hair', 'Two Years', 'Male', 'Large', TRUE, TRUE, TRUE, 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered', 5000, 'https://cdn2.thedogapi.com/images/H1zSie9V7_1280.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Emma', 'Dog', 'American Bulldog"', 'Brown with white parts', 'Short hair', 'Nine Months', 'Female', 'Medium', FALSE, FALSE, FALSE, 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', 2000, 'https://cdn2.thedogapi.com/images/pk1AAdloG.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Ryan', 'Dog', 'Akita', 'Brown with white parts', 'Medium hair', 'Three Years', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous', 1000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Linus', 'Cat', 'Australian Mist', 'Light brown with light black stripes', 'Short hair', 'Six Months', 'Male', 'Medium', FALSE, TRUE, FALSE, 'Lively, Social, Fun-loving, Relaxed, Affectionate', 4000, 'https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Phil', 'Cat', 'Abyssian', 'Orange with brown stripes', 'Short hair', 'Six Months', 'Male', 'Medium', TRUE, TRUE, TRUE, 'Active, Energetic, Independent, Intelligent, Gentle', 5000, 'https://cdn2.thedogapi.com/images/H6UCIZJsc.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Paul', 'Cat', 'Munchkin', 'Brown with black stripes and a white belly', 'Medium hair', 'Three Years', 'Male', 'Small', TRUE, FALSE, TRUE, 'Agile, Easy Going, Intelligent, Playful', 2000, 'https://cdn2.thecatapi.com/images/ilQzcQdl7.jpg');
+INSERT INTO "animals" ("name", "animal_type", "breed", "color", "coat_length", "age", "sex", "size", "house_trained", "vaccinated", "neutered", "personality", "price", "picture")
+VALUES
+('Tony', 'Cat', 'Siberian', 'Dust brown with black accentws', 'Long hair', 'Four Months', 'Female', 'Small', TRUE, TRUE, TRUE, 'Curious, Intelligent, Loyal, Sweet, Agile, Playful, Affectionate', 500, 'https://cms.qz.com/wp-content/uploads/2019/02/RTXLA3F-e1551362816993.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+--- Fake interested people
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('James', 'Richardson', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 1, '2020-01-28');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Sara', 'Samuels', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 2, '2020-02-01');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Evelyn', 'Wellington', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 3, '2020-02-02');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Paul', 'Larson', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 4, '2020-01-20');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Chase', 'Crawford', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 1, '2020-01-08');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Singh', 'Patel', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 5, '2020-01-11');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Xiu', 'La', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 6, '2020-02-01');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Oly', 'Mann', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 2, '2020-02-02');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Mark', 'Jackson', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 3, '2020-02-01');
+INSERT INTO "people" ("first_name", "last_name", "email", "phone_number", "date_of_birth", "address", "occupation", "type_of_home", "interested_in", "interested_on")
+VALUES
+('Ursula', 'Peters', 'a@gmail.com', '4144003449', '11-19-1988', '123 Fake Street, Fakesville, Fake', 'Surfer', 'House', 4, '2020-02-01');

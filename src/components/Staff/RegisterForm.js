@@ -9,7 +9,6 @@ class RegisterForm extends Component {
     username: '',
     password: '',
   };
-
   registerUser = (event) => {
     event.preventDefault();
     this.props.dispatch({
@@ -21,37 +20,40 @@ class RegisterForm extends Component {
     });
     this.props.history.push('/staff/home')
   }; // end registerUser
-
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   };
-
   render() {
     return (
       <Box style={{backgroundColor: '#EFF7F6'}}>
-        <Grid container direction="column" alignItems="flex-start">
-      {/* <form className="formPanel" onSubmit={this.registerUser}> */}
-        <Typography variant="h6">Register User</Typography>
-        {this.props.store.errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.registrationMessage}
-          </h3>
-        )}
-        <Grid item>
-          <InputLabel htmlFor="username">
-            Username:
-            <TextField
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </InputLabel>
-        </Grid>
-        <Grid item>
+        <Grid 
+          container 
+          direction="column" 
+          alignItems="flex-start"
+        >
+          <Typography variant="h6">
+            Register User
+          </Typography>
+          {this.props.store.errors.registrationMessage && (
+            <h3 className="alert" role="alert">
+              {this.props.store.errors.registrationMessage}
+            </h3>
+          )}
+          <Grid item>
+            <InputLabel htmlFor="username">
+              Username:
+              <TextField
+                type="text"
+                name="username"
+                value={this.state.username}
+                required
+                onChange={this.handleInputChangeFor('username')}
+              />
+            </InputLabel>
+          </Grid>
+          <Grid item>
           <InputLabel htmlFor="password">
             Password:
             <TextField
@@ -62,13 +64,18 @@ class RegisterForm extends Component {
               onChange={this.handleInputChangeFor('password')}
             />
           </InputLabel>
+          </Grid>
+          <Grid item>
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              onClick={this.registerUser}
+            >
+              Register
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button variant="outlined" color="primary" onClick={this.registerUser}>Register</Button>
-          {/* <input className="btn" type="submit" name="submit" value="Register" /> */}
-        </Grid>
-      {/* </form> */}
-      </Grid></Box>
+      </Box>
     );
   }
 }

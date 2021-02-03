@@ -15,7 +15,9 @@ const animalsReducer = (state = [], action) => {
       return action.payload;
     case 'SET_PIG':
       return action.payload;
-    case 'SET_OTHER':
+    case 'SET_SPIDER':
+      return action.payload;
+    case 'SET_BIRD':
       return action.payload;
     default:
       return state;

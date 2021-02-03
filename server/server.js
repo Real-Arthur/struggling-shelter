@@ -1,4 +1,3 @@
-
 const express = require('express');
 require('dotenv').config();
 
@@ -11,7 +10,6 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const animalsRouter = require('./routes/animals.router');
 const contactsRouter = require('./routes/contacts.router');
-const interestedRouter = require('./routes/interested.router');
 const userRouter = require('./routes/user.router');
 
 // Body parser middleware
@@ -28,7 +26,6 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/animals', animalsRouter);
 app.use('/api/contacts', contactsRouter);
-app.use('/api/interested', interestedRouter);
 app.use('/api/user', userRouter);
 
 // Serve static files
@@ -39,7 +36,7 @@ const PORT = process.env.PORT || 5000;
 
 /** Listen * */
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  console.log(`Listening on the port: ${PORT}`);
 });
 
 // module.exports = app;
